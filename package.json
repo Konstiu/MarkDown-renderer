@@ -1,25 +1,33 @@
 {
-  "name": "markdownreadme",
+  "name": "app_template",
   "version": "1.0.0",
-  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development",
-    "watch": "webpack --mode development --watch"
+    "build": "vite build",
+    "dev": "vite --mode development build",
+    "lint": "eslint src",
+    "stylelint": "stylelint src/**/*.vue src/**/*.scss src/**/*.css",
+    "watch": "vite --mode development build --watch"
   },
+  "browserslist": [
+    "extends @nextcloud/browserslist-config"
+  ],
   "dependencies": {
-    "@nextcloud/files": "^3.0.0",
-    "@nextcloud/router": "^3.0.0",
-    "highlight.js": "^11.9.0",
-    "markdown-it": "^14.0.0",
-    "vue": "^3.4.0"
+    "@nextcloud/vue": "^9.5.0",
+    "vue": "^3.5.28"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.0",
-    "@nextcloud/webpack-vue-config": "^6.0.0",
-    "babel-loader": "^10.0.0",
-    "css-loader": "^7.1.1",
-    "style-loader": "^4.0.0"
+    "@nextcloud/browserslist-config": "^3.1.2",
+    "@nextcloud/eslint-config": "^8.4.2",
+    "@nextcloud/stylelint-config": "^3.1.1",
+    "@nextcloud/vite-config": "^2.5.2",
+    "@vue/tsconfig": "^0.8.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  },
+  "engines": {
+    "node": "^24.0.0",
+    "npm": "^11.3.0"
   }
 }
