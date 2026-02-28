@@ -15,35 +15,64 @@ class ReadmeService {
         $this->userSession = $userSession;
     }
 
-    public function getReadme(string $path): array {
-        // Guard: user must be logged in
-        $user = $this->userSession->getUser();
-        if ($user === null) {
-            return ['exists' => false, 'error' => 'Not authenticated'];
-        }
+	public function getReadme(string $path): array {
+		$user = $this->userSession->getUser();
+		if ($user === null) {
+			return ['exists' => false, 'error' => 'Not authenticated'];
+		}
 
-        // Guard: prevent path traversal attempts
-        $normalizedPath = rtrim($path, '/');
-        if (str_contains($normalizedPath, '..')) {
-            return ['exists' => false, 'error' => 'Invalid path'];
-        }
+		$normalizedPath = rtrim($path, '/');
+		if ($normalizedPath === '') {
+			$normalizedPath = '/';
+		}
 
-        try {
-            $userFolder = $this->rootFolder->getUserFolder($user->getUID());
-            $file = $userFolder->get($normalizedPath . '/README.md');
+		// Guard: prevent path traversal attempts
+		if (str_contains($normalizedPath, '..')) {
+			return ['exists' => false, 'error' => 'Invalid path'];
+		}
 
-            // Make sure it's actually a file, not a folder
-            if (!($file instanceof \OCP\Files\File)) {
-                return ['exists' => false];
-            }
+		// Candidate filenames (case variants + optional no-extension)
+		$candidates = [
+			'README.md',
+			'Readme.md',
+			'readme.md',
+			'README.MD',
+			'ReadMe.md',
+			'README',
+			'Readme',
+			'readme',
+		];
 
-            $content = $file->getContent();
-            return ['exists' => true, 'content' => $content];
+		try {
+			$userFolder = $this->rootFolder->getUserFolder($user->getUID());
 
-        } catch (NotFoundException $e) {
-            return ['exists' => false];
-        } catch (\Exception $e) {
-            return ['exists' => false, 'error' => 'Unexpected error'];
-        }
-    }
+			// Resolve folder node for the given path
+			$folder = $normalizedPath === '/' ? $userFolder : $userFolder->get($normalizedPath);
+			if (!($folder instanceof \OCP\Files\Folder)) {
+				return ['exists' => false];
+			}
+
+			foreach ($candidates as $name) {
+				try {
+					$node = $folder->get($name);
+					if ($node instanceof \OCP\Files\File) {
+						return [
+							'exists' => true,
+							'name' => $name,
+							'content' => $node->getContent(),
+						];
+					}
+				} catch (NotFoundException $e) {
+					// try next
+				}
+			}
+
+			return ['exists' => false];
+
+		} catch (NotFoundException $e) {
+			return ['exists' => false];
+		} catch (\Exception $e) {
+			return ['exists' => false, 'error' => 'Unexpected error'];
+		}
+	}
 }

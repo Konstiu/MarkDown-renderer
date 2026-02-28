@@ -8,16 +8,17 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@nextcloud/files": "^3.12.2",
+    "@nextcloud/files": "^4.0.0",
     "@nextcloud/router": "^3.1.0",
     "highlight.js": "^11.9.0",
     "markdown-it": "^14.0.0",
+    "markdown-it-task-lists": "^2.1.1",
     "vue": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.0",
-    "@nextcloud/webpack-vue-config": "^6.0.0",
+    "@nextcloud/webpack-vue-config": "^7.0.2",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.1",
     "style-loader": "^4.0.0"
