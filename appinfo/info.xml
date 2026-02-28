@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
-<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-    <id>markdownreadme</id>
-    <name>Markdown README Viewer</name>
-    <description>Renders README.md inside folders like GitLab</description>
-    <version>1.0.0</version>
-    <licence>agpl</licence>
-    <author mail="you@example.com" homepage="https://example.com">Your Name</author>
-    <namespace>MarkdownReadme</namespace>
-    <category>files</category>
-    <dependencies>
-        <nextcloud min-version="33" />
-    </dependencies>
-    <background-jobs/>
-    <settings/>
-</info>
+	<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+		<id>markdownreadme</id>
+		<name>Markdown README Viewer</name>
+		<summary>Show README.md in Files folders</summary>
+		<description>Renders README.md inside folders like GitLab.</description>
+		<version>1.0.0</version>
+		<licence>AGPL-3.0-or-later</licence>
+		<author mail="you@example.com" homepage="https://example.com">Your Name</author>
+		<namespace>MarkdownReadme</namespace>
+		<category>files</category>
+		<types>
+			<filesystem/>
+		</types>
+		<dependencies>
+			<nextcloud min-version="33" max-version="33"/>
+		</dependencies>
+	</info>

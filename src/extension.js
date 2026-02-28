@@ -1,99 +1,149 @@
-import { defineComponent, ref, watch, h } from 'vue'
-import { registerFileListFooter } from '@nextcloud/files'
+import { Header, registerFileListHeaders } from '@nextcloud/files'
 import { generateUrl } from '@nextcloud/router'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import './readme-header.css'
 
-// Configure markdown-it with syntax highlighting
+const APP_ID = 'markdownreadme'
+const HEADER_ID = `${APP_ID}-readme-header`
+
 const md = new MarkdownIt({
-    html: false,       // Disable raw HTML for security (XSS prevention)
-    linkify: true,
-    typographer: true,
-    highlight(str, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-            try {
-                return '<pre class="hljs"><code>'
-                    + hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
-                    + '</code></pre>'
-            } catch (_) { /* fall through to default */ }
-        }
-        return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
-    },
+	html: false,
+	linkify: true,
+	typographer: true,
+	highlight(str, lang) {
+		if (lang && hljs.getLanguage(lang)) {
+			try {
+				return `<pre class="hljs"><code>${hljs.highlight(str, { language: lang, ignoreIllegals: true }).value}</code></pre>`
+			} catch {
+				// fall through
+			}
+		}
+		return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`
+	},
 })
 
-const ReadmeFooter = defineComponent({
-    name: 'ReadmeFooter',
+let rootElement = null
+let requestCounter = 0
 
-    props: {
-        // NC33 FileList footer API passes the current Folder node here
-        currentFolder: {
-            type: Object,
-            default: null,
-        },
-    },
+const toUserPath = (folder) => {
+	const rawPath = String(folder?.path ?? '/').trim()
+	if (!rawPath || rawPath === '/') {
+		return '/'
+	}
 
-    setup(props) {
-        const htmlContent = ref('')
-        const isLoading = ref(false)
+	const normalized = rawPath.startsWith('/') ? rawPath : `/${rawPath}`
+	const match = normalized.match(/^\/(?:[^/]+\/)?files(\/.*)?$/)
+	if (match) {
+		return match[1] ?? '/'
+	}
 
-        async function fetchReadme(folder) {
-            if (!folder) {
-                htmlContent.value = ''
-                return
-            }
+	return normalized
+}
 
-            // NC33: folder.path is the WebDAV path e.g. "/admin/files/MyFolder"
-            // Strip the /userId/files prefix to get the relative user path
-            const rawPath = folder.path ?? '/'
-            const match = rawPath.match(/^\/[^/]+\/files(\/.*)?$/)
-            const userPath = match ? (match[1] ?? '/') : rawPath
+const showPanel = (panel) => {
+	panel.classList.remove('hidden')
+}
 
-            isLoading.value = true
-            htmlContent.value = ''
+const hidePanel = (panel) => {
+	panel.classList.add('hidden')
+}
 
-            try {
-                // Use @nextcloud/router for correct URL generation in NC33
-                const apiUrl = generateUrl('/apps/markdownreadme/api/readme')
-                const url = new URL(apiUrl, window.location.origin)
-                url.searchParams.set('path', userPath)
+const showMessage = (panel, message) => {
+	showPanel(panel)
+	const body = panel.querySelector('.markdownreadme-body')
+	if (body) {
+		body.innerHTML = `<p class="markdownreadme-muted">${md.utils.escapeHtml(message)}</p>`
+	}
+}
 
-                const response = await fetch(url.toString(), {
-                    headers: { 'Accept': 'application/json' },
-                })
+const showLoading = (panel) => {
+	showMessage(panel, 'Loading README...')
+}
 
-                if (!response.ok) {
-                    htmlContent.value = ''
-                    return
-                }
+const showReadme = (panel, content) => {
+	showPanel(panel)
+	const body = panel.querySelector('.markdownreadme-body')
+	if (!body) {
+		return
+	}
+	body.innerHTML = md.render(content)
+}
 
-                const data = await response.json()
-                htmlContent.value = data.exists ? md.render(data.content) : ''
+const fetchReadme = async (panel, folder) => {
+	if (!folder) {
+		hidePanel(panel)
+		return
+	}
 
-            } catch (error) {
-                console.error('[markdownreadme] Failed to fetch README:', error)
-                htmlContent.value = ''
-            } finally {
-                isLoading.value = false
-            }
-        }
+	const path = toUserPath(folder)
+	const requestId = ++requestCounter
+	showLoading(panel)
 
-        watch(() => props.currentFolder, fetchReadme, { immediate: true })
+	try {
+		const apiUrl = new URL(generateUrl('/apps/markdownreadme/api/readme'), window.location.origin)
+		apiUrl.searchParams.set('path', path)
 
-        return () => {
-            if (!htmlContent.value) {
-                return null
-            }
+		const response = await fetch(apiUrl.toString(), {
+			headers: { Accept: 'application/json' },
+			credentials: 'same-origin',
+		})
 
-            return h('div', {
-                class: 'readme-footer',
-                innerHTML: htmlContent.value,
-            })
-        }
-    },
-})
+		if (requestId !== requestCounter) {
+			return
+		}
 
-// Register footer — NC33 stable API
-registerFileListFooter({
-    id: 'markdownreadme',
-    component: ReadmeFooter,
-})
+		if (!response.ok) {
+			showMessage(panel, 'Could not load README.')
+			return
+		}
+
+		const data = await response.json()
+		if (!data?.exists || !data?.content) {
+			showMessage(panel, 'No README.md in this folder.')
+			return
+		}
+
+		showReadme(panel, String(data.content))
+	} catch (error) {
+		if (requestId !== requestCounter) {
+			return
+		}
+		showMessage(panel, 'Could not load README.')
+		console.error('[markdownreadme] README fetch failed', error)
+	}
+}
+
+const createPanel = () => {
+	const panel = document.createElement('section')
+	panel.className = 'markdownreadme-panel hidden'
+	panel.innerHTML = `
+		<header class="markdownreadme-header">
+			<h2>README</h2>
+		</header>
+		<div class="markdownreadme-body"></div>
+	`
+	return panel
+}
+
+registerFileListHeaders(new Header({
+	id: HEADER_ID,
+	order: 100,
+	enabled: () => true,
+	render(el, folder) {
+		console.log('[markdownreadme] header render', folder?.path)
+		el.innerHTML = ''
+		rootElement = createPanel()
+		el.appendChild(rootElement)
+		void fetchReadme(rootElement, folder)
+	},
+	updated(folder) {
+		console.log('[markdownreadme] header updated', folder?.path)
+		if (!rootElement) {
+			return
+		}
+		void fetchReadme(rootElement, folder)
+	},
+}))
+
+console.log('[markdownreadme] file list header registered')

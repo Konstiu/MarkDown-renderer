@@ -1,0 +1,60 @@
+.markdownreadme-panel {
+	background: var(--color-main-background);
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	margin: 8px 0 16px;
+	overflow: hidden;
+}
+
+.markdownreadme-panel.hidden {
+	display: none;
+}
+
+.markdownreadme-header {
+	align-items: center;
+	background: var(--color-background-dark);
+	border-bottom: 1px solid var(--color-border);
+	display: flex;
+	min-height: 44px;
+	padding: 0 14px;
+}
+
+.markdownreadme-header h2 {
+	color: var(--color-main-text);
+	font-size: 14px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.markdownreadme-body {
+	color: var(--color-main-text);
+	font-size: 14px;
+	line-height: 1.6;
+	padding: 14px;
+}
+
+.markdownreadme-body > :first-child {
+	margin-top: 0;
+}
+
+.markdownreadme-body > :last-child {
+	margin-bottom: 0;
+}
+
+.markdownreadme-body pre {
+	background: var(--color-background-dark);
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	overflow: auto;
+	padding: 10px;
+}
+
+.markdownreadme-body code {
+	font-family: var(--font-face-monospace);
+	font-size: 12px;
+}
+
+.markdownreadme-muted {
+	color: var(--color-text-maxcontrast);
+	margin: 0;
+}

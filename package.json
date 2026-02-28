@@ -8,8 +8,8 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@nextcloud/files": "^3.0.0",
-    "@nextcloud/router": "^3.0.0",
+    "@nextcloud/files": "^3.12.2",
+    "@nextcloud/router": "^3.1.0",
     "highlight.js": "^11.9.0",
     "markdown-it": "^14.0.0",
     "vue": "^3.4.0"
