@@ -99,3 +99,16 @@
 	background: var(--color-background-hover);
 	font-weight: 650;
 }
+
+/* Lists */
+.markdownreadme-body ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.markdownreadme-body ol {
+    list-style: decimal;
+    padding-left: 20px;
+    margin: 8px 0;
+}

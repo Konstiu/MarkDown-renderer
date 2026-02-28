@@ -2,6 +2,9 @@
 
 Render a folder README (`README.md`, `Readme.md`, `readme.md`, etc.) directly at the top of the Nextcloud Files view — similar to GitLab.
 
+## Screenshot
+
+![Markdown README in Files](docs/screenshot-files-readme.png)
 ---
 
 ## Features

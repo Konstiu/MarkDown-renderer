@@ -1,19 +1,32 @@
 <?xml version="1.0"?>
-	<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-		<id>markdownreadme</id>
-		<name>Markdown README Viewer</name>
-		<summary>Show README.md in Files folders</summary>
-		<description>Renders README.md inside folders like GitLab.</description>
-		<version>1.0.0</version>
-		<licence>AGPL-3.0-or-later</licence>
-		<author mail="you@example.com" homepage="https://example.com">Your Name</author>
-		<namespace>MarkdownReadme</namespace>
-		<category>files</category>
-		<types>
-			<filesystem/>
-		</types>
-		<dependencies>
-			<nextcloud min-version="33" max-version="33"/>
-		</dependencies>
-	</info>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+
+	<id>markdownreadme</id>
+	<name>Markdown README Viewer</name>
+	<summary>Render README.md files inside the Files app</summary>
+
+	<description>
+		Render README.md files directly in the Nextcloud Files view,
+		similar to GitLab. Supports multiple filename variants,
+		read-only task lists, and automatic refresh on file changes.
+	</description>
+
+	<version>1.0.0</version>
+	<licence>AGPL-3.0</licence>
+
+	<author mail="konstantin.unteweger@gmail.com" homepage="https://unterweger.tech">
+		Konstantin Unterweger
+	</author>
+
+	<namespace>MarkdownReadme</namespace>
+	<category>files</category>
+
+	<repository>https://github.com/Konstiu/MarkDown-renderer</repository>
+	<bugs>https://github.com/Konstiu/MarkDown-renderer/issues</bugs>
+
+	<dependencies>
+		<nextcloud min-version="33" max-version="34"/>
+	</dependencies>
+
+</info>
