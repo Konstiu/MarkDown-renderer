@@ -7,7 +7,7 @@
 }
 
 .markdownreadme-body {
-	max-width: 900px;
+	max-width: None;
 	color: var(--color-text);
 	font-size: 14px;
 	line-height: 1.65;
