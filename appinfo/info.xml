@@ -1,32 +1,33 @@
 <?xml version="1.0"?>
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
 
-	<id>markdownreadme</id>
-	<name>Markdown README Viewer</name>
-	<summary>Render README.md files inside the Files app</summary>
+    <id>markdownreadme</id>
+    <name>Markdown README Viewer</name>
+    <summary>Render README.md files inside the Files app</summary>
 
-	<description>
-		Render README.md files directly in the Nextcloud Files view,
-		similar to GitLab. Supports multiple filename variants,
-		read-only task lists, and automatic refresh on file changes.
-	</description>
+    <description>
+        Render README.md files directly in the Nextcloud Files view,
+        similar to GitLab. Supports multiple filename variants,
+        read-only task lists, and automatic refresh on file changes.
+    </description>
 
-	<version>1.0.0</version>
-	<licence>AGPL-3.0</licence>
+    <version>1.0.0</version>
+    <licence>AGPL-3.0-or-later</licence>
 
-	<author mail="konstantin.unteweger@gmail.com" homepage="https://unterweger.tech">
-		Konstantin Unterweger
-	</author>
+    <author mail="konstantin.unteweger@gmail.com" homepage="https://unterweger.tech">
+        Konstantin Unterweger
+    </author>
 
-	<namespace>MarkdownReadme</namespace>
-	<category>files</category>
+    <namespace>MarkdownReadme</namespace>
+    <category>files</category>
 
-	<repository>https://github.com/Konstiu/MarkDown-renderer</repository>
-	<bugs>https://github.com/Konstiu/MarkDown-renderer/issues</bugs>
+    <website>https://github.com/Konstiu/MarkDown-renderer</website>
+    <bugs>https://github.com/Konstiu/MarkDown-renderer/issues</bugs>
+    <screenshot>https://raw.githubusercontent.com/Konstiu/MarkDown-renderer/refs/heads/main/docs/screenshot-files-readme.png</screenshot>
 
-	<dependencies>
-		<nextcloud min-version="33" max-version="34"/>
-	</dependencies>
+    <dependencies>
+        <nextcloud min-version="33" max-version="34"/>
+    </dependencies>
 
 </info>
