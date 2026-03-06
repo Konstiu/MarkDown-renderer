@@ -7,41 +7,41 @@
     <summary>Render README.md files directly inside the Nextcloud Files view</summary>
 
     <description><![CDATA[
-		# Markdown README Viewer
+# Markdown README Viewer
 
-		Markdown README Viewer renders `README.md` files directly inside the Nextcloud Files app, similar to repository platforms such as GitLab.
+Markdown README Viewer renders `README.md` files directly inside the Nextcloud Files app, similar to repository platforms such as GitLab.
 
-		## Current features
+## Current features
 
-		- Inline rendering of README files in the Files view
-		- Support for common filename variants such as `README.md` and `Readme.md`
-		- Support for core Markdown elements such as:
-		- headings
-		- emphasis
-		- code blocks
-		- links
-		- lists
-		- Automatic refresh when the file changes
-		- Clean integration into the standard Files interface
+- Inline rendering of README files in the Files view
+- Support for common filename variants such as `README.md` and `Readme.md`
+- Support for core Markdown elements such as:
+- headings
+- emphasis
+- code blocks
+- links
+- lists
+- Automatic refresh when the file changes
+- Clean integration into the standard Files interface
 
-		## Planned improvements
+## Planned improvements
 
-		- Improved table rendering
-		- Support for task lists / checkboxes
-		- Further Markdown compatibility improvements
+- Improved table rendering
+- Support for task lists / checkboxes
+- Further Markdown compatibility improvements
 
-		## Use cases
+## Use cases
 
-		This app is useful for:
+This app is useful for:
 
-		- project folders with developer documentation
-		- shared team directories
-		- personal notes and structured folder documentation
-		- repositories or synced workspaces stored in Nextcloud
+- project folders with developer documentation
+- shared team directories
+- personal notes and structured folder documentation
+- repositories or synced workspaces stored in Nextcloud
 
-		## Notes
+## Notes
 
-		The app currently focuses on lightweight inline viewing of README files inside Nextcloud. Support for additional Markdown features is being improved over time.
+The app currently focuses on lightweight inline viewing of README files inside Nextcloud. Support for additional Markdown features is being improved over time.
 		]]></description>
 
     <version>1.0.1</version>
