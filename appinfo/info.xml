@@ -1,26 +1,62 @@
 <?xml version="1.0"?>
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-
     <id>markdownreadme</id>
     <name>Markdown README Viewer</name>
-    <summary>Render README.md files inside the Files app</summary>
 
-    <description>
-        Render README.md files directly in the Nextcloud Files view,
-        similar to GitLab. Supports multiple filename variants,
-        read-only task lists, and automatic refresh on file changes.
-    </description>
+    <summary>Render README.md files directly inside the Nextcloud Files view</summary>
 
-    <version>1.0.0</version>
+    <description><![CDATA[
+# Markdown README Viewer
+
+Markdown README Viewer renders `README.md` files directly inside the Nextcloud Files app, similar to repository platforms such as GitLab.
+
+## Current features
+
+- Inline rendering of README files in the Files view
+- Support for common filename variants such as `README.md` and `Readme.md`
+- Support for core Markdown elements such as:
+  - headings
+  - emphasis
+  - code blocks
+  - links
+  - lists
+- Automatic refresh when the file changes
+- Clean integration into the standard Files interface
+
+## Planned improvements
+
+- Improved table rendering
+- Support for task lists / checkboxes
+- Further Markdown compatibility improvements
+
+## Use cases
+
+This app is useful for:
+
+- project folders with developer documentation
+- shared team directories
+- personal notes and structured folder documentation
+- repositories or synced workspaces stored in Nextcloud
+
+## Notes
+
+The app currently focuses on lightweight inline viewing of README files inside Nextcloud. Support for additional Markdown features is being improved over time.
+]]></description>
+
+    <version>1.0.1</version>
     <licence>AGPL-3.0-or-later</licence>
 
-    <author mail="konstantin.unteweger@gmail.com" homepage="https://unterweger.tech">
-        Konstantin Unterweger
-    </author>
+    <author mail="konstantin.unterweger@gmail.com" homepage="https://github.com/Konstiu">Konstantin Unterweger</author>
 
-    <namespace>MarkdownReadme</namespace>
+    <documentation>
+        <user>https://github.com/Konstiu/MarkDown-renderer#readme</user>
+        <admin>https://github.com/Konstiu/MarkDown-renderer#installation</admin>
+        <developer>https://github.com/Konstiu/MarkDown-renderer#development</developer>
+    </documentation>
+
     <category>files</category>
+    <category>tools</category>
 
     <website>https://github.com/Konstiu/MarkDown-renderer</website>
     <bugs>https://github.com/Konstiu/MarkDown-renderer/issues</bugs>
@@ -29,5 +65,4 @@
     <dependencies>
         <nextcloud min-version="33" max-version="34"/>
     </dependencies>
-
 </info>
