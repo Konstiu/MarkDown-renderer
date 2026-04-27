@@ -1,6 +1,7 @@
 import { registerFileListHeader } from '@nextcloud/files'
 import { generateUrl } from '@nextcloud/router'
 import MarkdownIt from 'markdown-it'
+import markdownItTaskLists from 'markdown-it-task-lists'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
@@ -54,6 +55,28 @@ const md = new MarkdownIt({
 		return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`
 	},
 })
+md.use(markdownItTaskLists, {
+	enabled: false,
+	label: true,
+	labelAfter: true,
+})
+
+const renderMarkdown = (content) => {
+	const html = md.render(content)
+	const template = document.createElement('template')
+	template.innerHTML = html
+
+	template.content.querySelectorAll('input.task-list-item-checkbox').forEach((input) => {
+		const marker = document.createElement('span')
+		marker.className = 'markdownreadme-task-box'
+		if (input.checked || input.hasAttribute('checked')) {
+			marker.classList.add('checked')
+		}
+		input.replaceWith(marker)
+	})
+
+	return template.innerHTML
+}
 
 let rootElement = null
 let requestCounter = 0
@@ -106,7 +129,7 @@ const showReadme = (panel, content) => {
 	if (!body) {
 		return
 	}
-	body.innerHTML = md.render(content)
+	body.innerHTML = renderMarkdown(content)
 }
 
 const fetchReadme = async (panel, folder) => {
@@ -147,7 +170,7 @@ const fetchReadme = async (panel, folder) => {
 
 		// README gefunden -> jetzt erst anzeigen + füllen
 		setTitle(panel, data.name || 'README')
-		setBodyHtml(panel, md.render(String(data.content)))
+		setBodyHtml(panel, renderMarkdown(String(data.content)))
 		showPanel(panel)
 	} catch (error) {
 		if (requestId !== requestCounter) return

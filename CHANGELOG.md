@@ -9,8 +9,20 @@ The format is based on Keep a Changelog.
 ### Planned
 
 - Improved table rendering
-- Support for task lists / checkboxes
 - Further Markdown compatibility improvements
+
+## [1.0.2] - 2026-04-27
+
+### Added
+
+- Support for hidden README filename variants such as `.README.md`, `.Readme.md`, and `.readme`
+- Support for Markdown task lists (`- [ ]` / `- [x]`) in the README header renderer
+
+### Changed
+
+- Render task list items with custom read-only checkbox markers to avoid oversized theme-driven native checkbox inputs
+- Improved task list spacing so checkbox list rows are compact and aligned with surrounding Markdown content
+- Made task marker colors theme-aware with safe CSS fallbacks for custom/older themes
 
 ## [1.0.1] - 2026-03-06
 

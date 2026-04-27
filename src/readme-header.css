@@ -11,6 +11,8 @@
 	color: var(--color-text);
 	font-size: 14px;
 	line-height: 1.65;
+	--markdownreadme-task-accent: var(--color-primary-element, #0a84ff);
+	--markdownreadme-task-checkmark: var(--color-main-background, #ffffff);
 }
 
 /* Headings */
@@ -111,4 +113,57 @@
     list-style: decimal;
     padding-left: 20px;
     margin: 8px 0;
+}
+
+.markdownreadme-body .contains-task-list {
+	list-style: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.markdownreadme-body .task-list-item {
+	list-style: none;
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	margin: 2px 0;
+}
+
+.markdownreadme-body .task-list-item p {
+	margin: 0;
+}
+
+.markdownreadme-body .task-list-item > label {
+	margin: 0;
+	display: inline;
+}
+
+.markdownreadme-body .markdownreadme-task-box {
+	box-sizing: border-box;
+	width: 14px;
+	height: 14px;
+	min-width: 14px;
+	margin-top: 0.28em;
+	border: 1px solid var(--color-border-dark, var(--color-border, #6b7280));
+	border-radius: 3px;
+	background: transparent;
+	position: relative;
+	flex: 0 0 auto;
+}
+
+.markdownreadme-body .markdownreadme-task-box.checked {
+	background: var(--markdownreadme-task-accent);
+	border-color: var(--markdownreadme-task-accent);
+}
+
+.markdownreadme-body .markdownreadme-task-box.checked::after {
+	content: '';
+	position: absolute;
+	left: 3px;
+	top: 0px;
+	width: 4px;
+	height: 8px;
+	border: solid var(--markdownreadme-task-checkmark);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
 }
