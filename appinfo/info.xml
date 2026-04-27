@@ -14,20 +14,27 @@ Markdown README Viewer renders `README.md` files directly inside the Nextcloud F
 ## Current features
 
 - Inline rendering of README files in the Files view
-- Support for common filename variants such as `README.md` and `Readme.md`
+- Support for common and hidden filename variants such as `README.md`, `Readme.md`, `.README.md`, `.Readme.md`, and `.readme`
 - Support for core Markdown elements such as:
 - headings
 - emphasis
 - code blocks
 - links
 - lists
+- Support for Markdown task lists (`- [ ]` / `- [x]`) with read-only, theme-aware checkbox markers
 - Automatic refresh when the file changes
 - Clean integration into the standard Files interface
+
+## What's new in 1.0.2
+
+- Added support for hidden README filename variants from PR #4 (`feat(filenames): Handle hidden readme files`)
+- Added Markdown task list rendering in the README header renderer
+- Improved task list spacing and visual alignment
+- Made task marker colors theme-aware with safe CSS fallbacks for custom and older themes
 
 ## Planned improvements
 
 - Improved table rendering
-- Support for task lists / checkboxes
 - Further Markdown compatibility improvements
 
 ## Use cases
@@ -44,7 +51,7 @@ This app is useful for:
 The app currently focuses on lightweight inline viewing of README files inside Nextcloud. Support for additional Markdown features is being improved over time.
 		]]></description>
 
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <licence>AGPL-3.0-or-later</licence>
 
     <author>Konstantin Unterweger</author>
