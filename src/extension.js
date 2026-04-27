@@ -34,8 +34,8 @@ let refreshTimer = null
 
 // Supported README filename variants
 const README_CANDIDATES = new Set([
-	'README.md', 'Readme.md', 'readme.md', 'README.MD', 'ReadMe.md',
-	'README', 'Readme', 'readme',
+	'README.md', 'Readme.md', 'readme.md', 'README.MD', 'ReadMe.md', 'README', 'Readme', 'readme', 
+	'.README.md', '.Readme.md', '.readme.md', '.README.MD', '.ReadMe.md', '.README', '.Readme', '.readme',
 ])
 
 // Debounced refresh to avoid multiple rapid reloads
