@@ -41,6 +41,14 @@ class ReadmeService {
 			'README',
 			'Readme',
 			'readme',
+			'.README.md',
+			'.Readme.md',
+			'.readme.md',
+			'.README.MD',
+			'.ReadMe.md',
+			'.README',
+			'.Readme',
+			'.readme',
 		];
 
 		try {
