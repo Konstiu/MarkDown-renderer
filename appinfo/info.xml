@@ -71,6 +71,6 @@ The app currently focuses on lightweight inline viewing of README files inside N
     <screenshot>https://raw.githubusercontent.com/Konstiu/MarkDown-renderer/refs/heads/main/docs/screenshot-files-readme.png</screenshot>
 
     <dependencies>
-        <nextcloud min-version="32" max-version="34"/>
+        <nextcloud min-version="26" max-version="34"/>
     </dependencies>
 </info>
