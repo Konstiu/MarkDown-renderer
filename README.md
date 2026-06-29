@@ -20,8 +20,11 @@ Render a folder README (`README.md`, `Readme.md`, `readme.md`, etc.) directly at
 
 ## Compatibility
 
-* Nextcloud 32+
-* Uses the Files app header API with a legacy registration fallback for Nextcloud 32
+* Supported range: Nextcloud 26-34
+* Verified on Nextcloud 26
+* Verified during development on Nextcloud 34
+* Nextcloud 27-32 are expected to work because they use the same `@nextcloud/files` 3.x generation, but were not individually verified
+* Uses the Files app header API with a legacy registration fallback for the older header registration path
 
 ---
 
