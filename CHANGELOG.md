@@ -11,6 +11,18 @@ The format is based on Keep a Changelog.
 - Improved table rendering
 - Further Markdown compatibility improvements
 
+## [1.0.3] - 2026-06-29
+
+### Added
+
+- Added a legacy file list header registration fallback for Nextcloud 32 / `@nextcloud/files` v3 compatibility
+
+### Changed
+
+- Fixed duplicate task list checkbox rendering for Markdown task lists (`- [ ]` / `- [x]`)
+- Switched task list rendering to the plugin-generated checkbox markup and styled it directly via CSS for more stable output
+- Cleaned up list styling and corrected minor CSS issues in the README header renderer
+
 ## [1.0.2] - 2026-04-27
 
 ### Added

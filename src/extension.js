@@ -16,6 +16,19 @@ import { subscribe } from '@nextcloud/event-bus'
 const APP_ID = 'markdownreadme'
 const HEADER_ID = `${APP_ID}-readme-header`
 
+/**
+ * Nextcloud 32 still consumes file list headers from the legacy global array,
+ * while Nextcloud 33+ listens to the new registry-based API.
+ */
+const registerCompatibleFileListHeader = (header) => {
+	registerFileListHeader(header)
+
+	window._nc_filelistheader ??= []
+	if (!window._nc_filelistheader.find((entry) => entry.id === header.id)) {
+		window._nc_filelistheader.push(header)
+	}
+}
+
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('js', javascript)
 hljs.registerLanguage('typescript', typescript)
@@ -62,20 +75,7 @@ md.use(markdownItTaskLists, {
 })
 
 const renderMarkdown = (content) => {
-	const html = md.render(content)
-	const template = document.createElement('template')
-	template.innerHTML = html
-
-	template.content.querySelectorAll('input.task-list-item-checkbox').forEach((input) => {
-		const marker = document.createElement('span')
-		marker.className = 'markdownreadme-task-box'
-		if (input.checked || input.hasAttribute('checked')) {
-			marker.classList.add('checked')
-		}
-		input.replaceWith(marker)
-	})
-
-	return template.innerHTML
+	return md.render(content)
 }
 
 let rootElement = null
@@ -188,7 +188,7 @@ const createPanel = () => {
 	return panel
 }
 
-registerFileListHeader({
+registerCompatibleFileListHeader({
 	id: HEADER_ID,
 	order: 100,
 	enabled: () => true,

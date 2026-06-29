@@ -7,7 +7,7 @@
 }
 
 .markdownreadme-body {
-	max-width: None;
+	max-width: none;
 	color: var(--color-text);
 	font-size: 14px;
 	line-height: 1.65;
@@ -46,13 +46,6 @@
 	text-decoration: underline;
 	text-underline-offset: 2px;
 }
-
-/* Lists */
-.markdownreadme-body ul,
-.markdownreadme-body ol {
-	margin: 8px 0 8px 22px;
-}
-.markdownreadme-body li { margin: 4px 0; }
 
 /* Inline code + code blocks */
 .markdownreadme-body code {
@@ -104,15 +97,19 @@
 
 /* Lists */
 .markdownreadme-body ul {
-    list-style: disc;
-    padding-left: 20px;
-    margin: 8px 0;
+	list-style: disc;
+	padding-left: 20px;
+	margin: 8px 0;
 }
 
 .markdownreadme-body ol {
-    list-style: decimal;
-    padding-left: 20px;
-    margin: 8px 0;
+	list-style: decimal;
+	padding-left: 20px;
+	margin: 8px 0;
+}
+
+.markdownreadme-body li {
+	margin: 4px 0;
 }
 
 .markdownreadme-body .contains-task-list {
@@ -133,37 +130,41 @@
 	margin: 0;
 }
 
-.markdownreadme-body .task-list-item > label {
-	margin: 0;
-	display: inline;
-}
-
-.markdownreadme-body .markdownreadme-task-box {
+.markdownreadme-body .task-list-item-checkbox {
+	appearance: none;
+	-webkit-appearance: none;
 	box-sizing: border-box;
 	width: 14px;
 	height: 14px;
 	min-width: 14px;
-	margin-top: 0.28em;
+	margin: 0.28em 0 0;
 	border: 1px solid var(--color-border-dark, var(--color-border, #6b7280));
 	border-radius: 3px;
 	background: transparent;
 	position: relative;
 	flex: 0 0 auto;
+	pointer-events: none;
 }
 
-.markdownreadme-body .markdownreadme-task-box.checked {
+.markdownreadme-body .task-list-item-checkbox:checked {
 	background: var(--markdownreadme-task-accent);
 	border-color: var(--markdownreadme-task-accent);
 }
 
-.markdownreadme-body .markdownreadme-task-box.checked::after {
+.markdownreadme-body .task-list-item-checkbox:checked::after {
 	content: '';
 	position: absolute;
 	left: 3px;
-	top: 0px;
+	top: 0;
 	width: 4px;
 	height: 8px;
 	border: solid var(--markdownreadme-task-checkmark);
 	border-width: 0 2px 2px 0;
 	transform: rotate(45deg);
+}
+
+.markdownreadme-body .task-list-item > label {
+	margin: 0;
+	display: inline;
+	line-height: 1.5;
 }
