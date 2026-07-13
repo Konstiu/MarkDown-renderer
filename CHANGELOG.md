@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog.
 
-## [Unreleased]
+## [1.0.4] - 2026-07-13
+
+### Added
+
+- Added note about Nextcloud 34+ and the text app (v8.0.0) conflict in README and app info
 
 ### Planned
 

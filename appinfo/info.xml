@@ -59,7 +59,7 @@ To avoid this, disable one of them:
 - Rely on **text** if you want a full **viewer + editor** for READMEs in Nextcloud's native UI
 		]]></description>
 
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <licence>AGPL-3.0-or-later</licence>
 
     <author>Konstantin Unterweger</author>
