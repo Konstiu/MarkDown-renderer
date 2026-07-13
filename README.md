@@ -53,6 +53,16 @@ npm run watch
 
 ---
 
+## Nextcloud 34+ Note
+
+Starting with Nextcloud 34, the **text** app (v8.0.0) includes built-in README rendering. Both apps can display a README at the same time. Running both `markdownreadme` and `text` may show two README panels side by side.
+
+To avoid this, disable one of them:
+- Use `markdownreadme` if you want a lightweight **inline viewer** in the file list header (read-only, non-editable)
+- Rely on **text** if you want a full **viewer + editor** for READMEs in Nextcloud's native UI
+
+---
+
 ## License
 
 This project is licensed under the AGPL-3.0 License.
